@@ -3,6 +3,10 @@
 > **Theory of Computation (TOC) & Compiler Design Capstone Project**  
 > An automated applicant tracking and resume screening system powered by Context-Free Grammar (CFG) parsing, 3D parse tree visual dynamics, semantic skill matching, and automated email dispatch.
 
+[![Live Backend](https://img.shields.io/badge/Render-Backend%20Live-brightgreen)](https://toc-parser-resume-intelligence.onrender.com/docs)
+[![Database](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E?logo=supabase)](https://supabase.com)
+[![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-61DAFB?logo=react)](https://vitejs.dev)
+
 ---
 
 ## 🌟 Project Overview
@@ -16,6 +20,52 @@
 - **Automated Candidate Screening**: Computes real-time match scores against job postings using Jaccard skill similarity, experience duration, and education level multipliers.
 - **Automated Candidate Email Dispatch**: Sends status notifications (e.g. shortlisting updates, constructive missing-skill feedback) via the Resend API.
 - **Recruiter Admin Dashboard**: Manage job requisitions, evaluate applicant pools, inspect detailed score rationales, and update hiring statuses.
+
+---
+
+## 📐 Formal Grammar & Compiler Pipeline (TOC)
+
+The parsing engine follows classical multi-phase compiler architecture:
+
+```
+[ Unstructured PDF Resume ]
+             │
+             ▼
+    [ Text Sanitization ]  ─── Normalizes bullets, merges fragmented words
+             │
+             ▼
+    [ Lexical Analyzer ]   ─── Regex tokenization into Terminals
+             │
+             ▼
+       [ CFG Parser ]      ─── Recursive Descent Syntax Analysis
+             │
+             ▼
+    [ Semantic Extractor ] ─── Entity mapping (Experience, Education, Skills)
+             │
+             ▼
+    [ Scoring & Matching ] ─── Jaccard Similarity & Education Heuristics
+```
+
+### Context-Free Grammar (CFG) Production Rules:
+```bnf
+S           -> Header Experience Education Skills
+Header      -> Name Email Phone
+Experience  -> SECTION_EXPERIENCE ExpItem+
+ExpItem     -> JobTitle Company DateRange Description
+Education   -> SECTION_EDUCATION EduItem+
+EduItem     -> Degree Institution GradYear
+Skills      -> SECTION_SKILLS SkillItem+
+```
+
+### Screening & Match Scoring Algorithm:
+1. **Skill Match (Jaccard Similarity)**:
+   $$\text{Skill Score} = \left( \frac{|S_{\text{candidate}} \cap S_{\text{job}}|}{|S_{\text{candidate}} \cup S_{\text{job}}|} \right) \times 100$$
+2. **Education Heuristic Multiplier**:
+   - Degree matches or exceeds requirement: `1.0x`
+   - Master's required, candidate has Bachelor's: `0.5x`
+   - PhD required, candidate has Bachelor's: `0.2x`
+3. **Final Weighted Score**:
+   $$\text{Final Score} = \lfloor \text{Skill Score} \times \text{Education Multiplier} \rfloor$$
 
 ---
 
@@ -36,7 +86,7 @@ flowchart LR
     end
 
     subgraph Storage ["Database Layer"]
-        DB[(PostgreSQL / SQLite)]
+        DB[(Supabase PostgreSQL / SQLite)]
     end
 
     UI -->|REST API| Backend
@@ -45,8 +95,21 @@ flowchart LR
 
 - **Frontend**: React 19, Vite, TailwindCSS v4, Three.js, React Router v7
 - **Backend**: FastAPI, Uvicorn, Lark, pdfplumber, SQLAlchemy 2.0, Pydantic v2
-- **Database**: SQLite (local development zero-config) / PostgreSQL (production)
-- **Deployment**: Vercel (Frontend) + Render / Railway (Backend) + Supabase / Neon (Database)
+- **Database**: Supabase PostgreSQL (IPv4 Session Pooler) / SQLite (zero-config local dev)
+- **Deployment**: Vercel (Frontend) + Render (Backend) + Supabase (Database)
+
+---
+
+## 🧪 Sample Test Profiles
+
+Four reference test resumes are provided locally in [`sample_resumes/`](./sample_resumes/) for validation:
+
+| Candidate | Role | Degree | Key Skills | Recommended Test Job |
+|---|---|---|---|---|
+| **Sarah Chen** | Senior Full Stack Engineer | B.Tech, Stanford | Python, FastAPI, React, PostgreSQL, Docker, TailwindCSS | *Full Stack Software Engineer* (Python, React, FastAPI) |
+| **David Miller** | Backend Systems Engineer | M.Tech, Georgia Tech | Python, SQLAlchemy, PostgreSQL, Docker, AWS, FastAPI | *Senior Backend Engineer* (Python, PostgreSQL, AWS) |
+| **Priya Sharma** | Frontend React Engineer | B.E., UC Berkeley | React, JavaScript, Three.js, TailwindCSS, Vite | *Frontend & UI Engineer* (React, Three.js, TailwindCSS) |
+| **Alex Johnson** | Junior Software Engineer | B.Tech, State Poly | Python, JavaScript, React, HTML, CSS, Git | *Junior Web Developer* (JavaScript, Python, HTML) |
 
 ---
 
@@ -56,22 +119,20 @@ flowchart LR
 - **Node.js** (v18+)
 - **Python** (v3.10+)
 
-### Launching the Application
-
-#### Step 1: Start Backend
+### Step 1: Start Backend
 ```powershell
 cd backend
 python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-Backend API will be running at: `http://localhost:8000`  
-Interactive Swagger API documentation: `http://localhost:8000/docs`
+- API server running at: `http://localhost:8000`
+- Interactive Swagger API docs: `http://localhost:8000/docs`
 
-#### Step 2: Start Frontend
+### Step 2: Start Frontend
 ```powershell
 cd frontend
 npm run dev
 ```
-Frontend will be running at: `http://localhost:5173`
+- Frontend application running at: `http://localhost:5173`
 
 ---
 
@@ -85,41 +146,19 @@ Frontend will be running at: `http://localhost:5173`
 
 ---
 
-## 🌐 Full Cloud Deployment Guide
+## 🌐 Cloud Deployment Architecture
 
-Follow these simple steps to deploy the complete stack online for free:
+The application is deployed across cloud providers:
 
-### Step 1: Database Setup (Free PostgreSQL)
-1. Go to [Supabase](https://supabase.com) or [Neon](https://neon.tech) and create a free project.
-2. In Project Settings, navigate to **Database** -> **Connection string** (URI).
-3. Copy the URI (format: `postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres`).
-
-### Step 2: Backend Deployment (Render.com)
-1. Sign up on [Render.com](https://render.com) and click **New** -> **Web Service**.
-2. Connect your GitHub repository (`TOC-capstone-main`).
-3. Set the following settings:
-   - **Root Directory**: `backend`
-   - **Environment**: `Docker` (Render will automatically detect `backend/Dockerfile`)
-4. Under **Environment Variables**, add:
-   - `DB_URL`: *[Paste your Supabase/Neon PostgreSQL connection URI]*
-   - `RESEND_API_KEY`: *[Optional: your Resend API key for automated emails]*
-   - `SMTP_EMAIL`: `onboarding@resend.dev`
-5. Click **Create Web Service**.
-6. Once deployed, copy your service URL (e.g. `https://toc-parser-resume-intelligence.onrender.com`).
-
-### Step 3: Frontend Deployment (Vercel)
-1. Sign up on [Vercel](https://vercel.com) and click **Add New** -> **Project**.
-2. Import your GitHub repository.
-3. Configure the project:
-   - **Root Directory**: Click edit and select `frontend`.
-   - **Framework Preset**: `Vite`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Under **Environment Variables**, add:
-   - `VITE_API_URL`: *[Paste your deployed Render backend URL, e.g. `https://toc-parser-resume-intelligence.onrender.com`]*
-5. Click **Deploy**.
-
-Your application will now be live on the web!
+1. **Database (Supabase PostgreSQL)**:
+   - Shared session-mode pooler: `aws-1-ap-northeast-1.pooler.supabase.com:5432`
+2. **Backend (Render.com Docker Web Service)**:
+   - Live URL: [https://toc-parser-resume-intelligence.onrender.com](https://toc-parser-resume-intelligence.onrender.com)
+   - API Docs: [https://toc-parser-resume-intelligence.onrender.com/docs](https://toc-parser-resume-intelligence.onrender.com/docs)
+3. **Frontend (Vercel)**:
+   - Root Directory: `frontend`
+   - Framework: `Vite`
+   - Environment Variable: `VITE_API_URL=https://toc-parser-resume-intelligence.onrender.com`
 
 ---
 
