@@ -56,19 +56,11 @@ flowchart LR
 - **Node.js** (v18+)
 - **Python** (v3.10+)
 
-### 1-Click Launch (Windows)
-Double-click `start-all.bat` (or run `./start-all.ps1` in PowerShell). This will automatically launch both the Backend and Frontend servers in separate windows.
-
-### Manual Launch
+### Launching the Application
 
 #### Step 1: Start Backend
 ```powershell
 cd backend
-
-# Install dependencies (already installed)
-pip install -r requirements.txt
-
-# Start FastAPI server
 python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 Backend API will be running at: `http://localhost:8000`  
@@ -77,11 +69,6 @@ Interactive Swagger API documentation: `http://localhost:8000/docs`
 #### Step 2: Start Frontend
 ```powershell
 cd frontend
-
-# Install dependencies (already installed)
-npm install
-
-# Start Vite dev server
 npm run dev
 ```
 Frontend will be running at: `http://localhost:5173`
@@ -158,7 +145,5 @@ Your application will now be live on the web!
 │   │   └── main.jsx         # App mounting point
 │   ├── package.json         # NPM packages
 │   └── vite.config.js       # Vite configuration
-├── start-all.bat            # 1-click Windows batch launcher
-├── start-all.ps1            # 1-click Windows PowerShell launcher
 └── README.md                # Project documentation
 ```
