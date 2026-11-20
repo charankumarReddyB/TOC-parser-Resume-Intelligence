@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pdfplumber
+lark
+reportlab
+SQLAlchemy
+psycopg2-binary
+python-dotenv
+python-multipart
+resend
