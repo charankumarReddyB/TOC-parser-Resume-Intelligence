@@ -5,7 +5,7 @@ export default function Header() {
         <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 w-full bg-surface-bright shadow-sm border-b border-outline-variant/20">
             {/* Brand & Search (on left) */}
             <div className="flex items-center space-x-8 flex-1">
-                <h1 className="text-2xl font-headline font-bold text-primary tracking-tight">SyntaxHire</h1>
+                <h1 className="text-2xl font-headline font-bold text-primary tracking-tight">TOC Parser</h1>
                 <div className="relative max-w-md w-full hidden sm:block">
                     <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
                     <input 

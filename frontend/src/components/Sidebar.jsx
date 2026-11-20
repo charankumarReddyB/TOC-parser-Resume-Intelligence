@@ -14,8 +14,8 @@ export default function Sidebar({ onLogout }) {
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx6bNHVbC4Kicqd8WYDDAmBqSuL0Wmy2sJC3uKNOxYnKythlEY_vlhlOxbeNOYBD50QYbjqy3A05FHtVd1K8XpSxXYlW7Hrn6hrNtQPH2_ATc08qRcs0AYTuIHdugwgx79yK-2FyAWA4vLTR_lvea-6SA3yPLizGAIodBEnvxx_cmlWDsSOc1fuP4FrBEs9JHWfrZSn2lQVKH53ib1GqZgpCfLPNtyN1eZC_CpVEloyGTEBBy9vWmC"
                 />
                 <div>
-                    <h2 className="text-xl font-headline text-on-surface font-bold tracking-tight">SyntaxHire</h2>
-                    <p className="text-xs text-on-surface-variant font-label">CFG Resume Intelligence</p>
+                    <h2 className="text-xl font-headline text-on-surface font-bold tracking-tight">TOC Parser</h2>
+                    <p className="text-xs text-on-surface-variant font-label">Resume Intelligence</p>
                 </div>
             </div>
 

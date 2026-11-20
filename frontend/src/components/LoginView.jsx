@@ -46,8 +46,8 @@ export default function LoginView({ onLogin }) {
                     <div className="w-16 h-16 bg-primary-container text-on-primary-container rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-sm border border-primary/20">
                         <span className="material-symbols-outlined text-3xl">admin_panel_settings</span>
                     </div>
-                    <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight">Welcome to SyntaxHire</h2>
-                    <p className="text-on-surface-variant text-sm mt-1">Please log in to access the CFG Resume Intelligence dashboard.</p>
+                    <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight">Welcome Back</h2>
+                    <p className="text-on-surface-variant text-sm mt-1">Please log in to access the TOC Parser admin dashboard.</p>
                 </div>
                 
                 <div className="p-8">

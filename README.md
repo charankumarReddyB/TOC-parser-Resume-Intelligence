@@ -1,4 +1,4 @@
-# SyntaxHire: CFG-Powered Intelligent Resume Parser & ATS
+# TOC Parser - Resume Intelligence
 
 > **Theory of Computation (TOC) & Compiler Design Capstone Project**  
 > An automated applicant tracking and resume screening system powered by Context-Free Grammar (CFG) parsing, 3D parse tree visual dynamics, semantic skill matching, and automated email dispatch.
@@ -7,7 +7,7 @@
 
 ## 🌟 Project Overview
 
-**SyntaxHire** is an end-to-end recruitment platform that applies formal language theory and compiler design principles (Lexical, Syntactic, and Semantic Analysis) to parse and screen unstructured PDF resumes into structured candidate intelligence.
+**TOC Parser - Resume Intelligence** is an end-to-end recruitment platform that applies formal language theory and compiler design principles (Lexical, Syntactic, and Semantic Analysis) to parse and screen unstructured PDF resumes into structured candidate intelligence.
 
 ### Key Capabilities
 - **Lexical Analysis (Tokenizer)**: Recognizes terminals such as `EMAIL`, `PHONE`, `DATE_RANGE`, and section header delimiters (`EXPERIENCE`, `EDUCATION`, `SKILLS`).
@@ -105,7 +105,7 @@ Follow these simple steps to deploy the complete stack online for free:
    - `RESEND_API_KEY`: *[Optional: your Resend API key for automated emails]*
    - `SMTP_EMAIL`: `onboarding@resend.dev`
 5. Click **Create Web Service**.
-6. Once deployed, copy your service URL (e.g. `https://syntaxhire-api.onrender.com`).
+6. Once deployed, copy your service URL (e.g. `https://toc-parser-resume-intelligence.onrender.com`).
 
 ### Step 3: Frontend Deployment (Vercel)
 1. Sign up on [Vercel](https://vercel.com) and click **Add New** -> **Project**.
@@ -116,7 +116,7 @@ Follow these simple steps to deploy the complete stack online for free:
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 4. Under **Environment Variables**, add:
-   - `VITE_API_URL`: *[Paste your deployed Render backend URL, e.g. `https://syntaxhire-api.onrender.com`]*
+   - `VITE_API_URL`: *[Paste your deployed Render backend URL, e.g. `https://toc-parser-resume-intelligence.onrender.com`]*
 5. Click **Deploy**.
 
 Your application will now be live on the web!
