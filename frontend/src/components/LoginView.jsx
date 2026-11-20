@@ -6,7 +6,7 @@ export default function LoginView({ onLogin }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -49,7 +49,7 @@ export default function LoginView({ onLogin }) {
                     <h2 className="text-2xl font-headline font-bold text-on-surface tracking-tight">Welcome Back</h2>
                     <p className="text-on-surface-variant text-sm mt-1">Please log in to access the TOC Parser admin dashboard.</p>
                 </div>
-                
+
                 <div className="p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
@@ -58,14 +58,14 @@ export default function LoginView({ onLogin }) {
                                 {error}
                             </div>
                         )}
-                        
+
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-bold text-on-surface-variant mb-1 ml-1 uppercase tracking-wider">Username</label>
                                 <div className="relative">
                                     <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50">person</span>
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         required
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
@@ -74,13 +74,13 @@ export default function LoginView({ onLogin }) {
                                     />
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <label className="block text-sm font-bold text-on-surface-variant mb-1 ml-1 uppercase tracking-wider">Password</label>
                                 <div className="relative">
                                     <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant/50">lock</span>
-                                    <input 
-                                        type="password" 
+                                    <input
+                                        type="password"
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -91,8 +91,8 @@ export default function LoginView({ onLogin }) {
                             </div>
                         </div>
 
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             disabled={loading}
                             className="w-full bg-primary text-on-primary font-bold py-3.5 px-4 rounded-xl shadow-md hover:bg-surface-tint/90 hover:shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                         >

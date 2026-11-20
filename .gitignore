@@ -16,10 +16,10 @@ Thumbs.db
 
 # Project specifics
 *.pdf
+!sample_resumes/*.pdf
 *.db
 *.sqlite
 *.sqlite3
 node_modules/
 dist/
 backend/samples/
-sample_resumes/
